@@ -20,7 +20,7 @@ df_C.columns = df_C.columns.swaplevel(0, 1)
 df_C_yo = df_C.yo_final
 # df_C_otro = df_C.otro_final
 
-# Get only stories with more than N_PA answers and drop rows that cotanin null values
+# Get only stories with more than N_PA answers and drop rows that contain null values
 subset_df = df_C_yo.loc[:, df_C_yo.count() > N_PA]
 subset_df = subset_df.dropna(how='any')
 
@@ -28,7 +28,8 @@ subset_df = subset_df.dropna(how='any')
 elist_yo = {}
 story_count = 1
 for column in subset_df.columns:
-    print(f'Computing weights for story number {story_count}: {column}...')
+    if story_count % 10 == 0:
+        print(f'Computing weights for story number {story_count}: {column}...')
     
     elist_yo[column] = []
     for i, id1 in enumerate(subset_df.index):
@@ -36,18 +37,28 @@ for column in subset_df.columns:
             if j > i:
                 pair = (id1, id2, weight(subset_df[column][id1], subset_df[column][id2]))
                 elist_yo[column].append(pair)
-
-    # limit the number of stories to analyze to fasten computation
-    if story_count == 1:
-        break
     story_count += 1
 print('Weights computation complete!')
 
+# Compute average weights from each pair of nodes among all stories
+sample_key = list(elist_yo.keys())[0]
+weights_matrix = np.empty((len(elist_yo), len(elist_yo[sample_key])))
+
+for i, story in enumerate(elist_yo):
+    for j, pair in enumerate(elist_yo[story]):
+        weights_matrix[i-1][j-1] = pair[2]
+
+avg_weights = np.mean(weights_matrix, axis=0)
+
+# Get a list with all nodes pairs and their average weight
+avg_list = []
+for i, pair in enumerate(elist_yo[sample_key]):
+    avg_list.append((pair[0], pair[1], avg_weights[i]))
+
+
 # Generate graph
-story = 'capacitation_Teatre_Amigues'
-ans_lst = elist_yo[story]
 G = nx.Graph()
-G.add_weighted_edges_from(ans_lst)
+G.add_weighted_edges_from(avg_list)
 
 # Save graph
 i = 0
