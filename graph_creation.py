@@ -28,9 +28,6 @@ subset_df = subset_df.dropna(how='any')
 elist_yo = {}
 story_count = 1
 for column in subset_df.columns:
-    if story_count % 10 == 0:
-        print(f'Computing weights for story number {story_count}: {column}...')
-    
     elist_yo[column] = []
     for i, id1 in enumerate(subset_df.index):
         for j, id2 in enumerate(subset_df.index):
