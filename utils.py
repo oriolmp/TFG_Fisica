@@ -1,5 +1,6 @@
 import networkx as nx
 import numpy as np
+import pandas as pd
 
 # Custom library with some useful functions realted to the graph
 
@@ -9,7 +10,7 @@ def one_pair_weight_for_one_story(
         alpha: float = 1.,
         beta: float = 2/3,
         gamma: float = 1/3
-        ):
+        ) -> float:
     """
     Computes one edge weigth among two nodes for a single story.
     The weight can be:
@@ -42,3 +43,26 @@ def one_pair_weight_for_one_story(
             value = gamma
     
     return value
+
+def edge_weight(
+        df: pd.Dataframes,
+        pair: tuple,
+        stories: list
+    ) -> tuple:
+    """
+    Compute the average weight among some stories for an edge connecting two nodes.
+
+    Args:
+        - df: Pandas dataframe containing all nodes information
+        - pair: the pair of nodes. (id1, id2)
+        - stories: list containing the stories from which the average will be done
+    
+    Returns:
+        - edge_value: the average edge weight among all stories
+    """
+
+    value_list = [one_pair_weight_for_one_story(df[story][pair[0]], df[story][pair[1]]) 
+                  for story in stories]
+    edge_value = np.mean(value_list)
+
+    return edge_value 
