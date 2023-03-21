@@ -45,7 +45,7 @@ def one_pair_weight_for_one_story(
     return value
 
 def edge_weight(
-        df: pd.Dataframes,
+        df: pd.DataFrame,
         pair: tuple,
         stories: list
     ) -> tuple:
