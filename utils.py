@@ -13,7 +13,7 @@ def color_coding(
         G: nx.graph,
         sociodem_df: pd.DataFrame,
         sociodem_entry: str,
-        colors_dict: dict 
+        colors_dict: dict = colors
         ) -> list:
     """
     For each node in graph G, maps a specified attribute to a color.
@@ -28,7 +28,7 @@ def color_coding(
         - color_map: list which contains the nodes colors ordered by graph node order
      """
 
-    color_map = [colors[sociodem_entry][sociodem_df[sociodem_entry].loc[node]] for node in G]
+    color_map = [colors_dict[sociodem_entry][sociodem_df[sociodem_entry].loc[node]] for node in G]
 
     return color_map
 
