@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 
 # Custom library with some useful functions realted to the graph
-colors = { "pp"    : {"Sí":'#d7191c', "No":'#2c7bb6', "nvr":'#ffffbf'}, 
+COLORS = { "pp"    : {"Sí":'#d7191c', "No":'#2c7bb6', "nvr":'#ffffbf'}, 
            "p_cuid": {"Sí":'#d7191c', "No":'#2c7bb6', "nvr":'#ffffbf'},
            "genere": {"m":"#2c7bb6", "f":"#d7191c", "d":"#fdae61", "nvr":"#abd9e9"},
            "edat"  : {'1':"#d73027", '2':"#fc8d59", '3':"#fee090", '4':"#e0f3f8", '5':"#91bfdb", '6':"#4575b4", 'nvr':"gray"}   
@@ -13,7 +13,7 @@ def color_coding(
         G: nx.graph,
         sociodem_df: pd.DataFrame,
         sociodem_entry: str,
-        colors_dict: dict = colors
+        colors_dict: dict = COLORS
         ) -> list:
     """
     For each node in graph G, maps a specified attribute to a color.
