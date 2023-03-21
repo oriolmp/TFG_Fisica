@@ -3,7 +3,7 @@ import numpy as np
 
 # Custom library with some useful functions realted to the graph
 
-def weight(
+def one_pair_weight_for_one_story(
         ans1: str,
         ans2: str,
         alpha: float = 1.,
@@ -11,7 +11,12 @@ def weight(
         gamma: float = 1/3
         ):
     """
-    Computes the edge weigth among two nodes.
+    Computes one edge weigth among two nodes for a single story.
+    The weight can be:
+        - alpha if ans1 = 'A' and ans2 = 'A'
+        - beta if (alpha if ans1 = 'A' and ans2 = 'B') or (alpha if ans1 = 'B' and ans2 = 'A')
+        - gamma if ans1 = 'B' and ans2 = 'B'
+        - 0 if ans1 = 'C' or ans2 = 'C'
 
     Args:
         ans1: Answer from node 1. Possible values are 'A', 'B' or 'C'
@@ -21,19 +26,19 @@ def weight(
         gamma: Weight value when both answers are 'B' 
     
     Returns:
-        weight: The edge weight
+        value: The edge weight for the given pair
     """
 
-    weight = 0
+    value = 0
     if ans1 == 'A':
         if ans2 == 'A':
-            weight = alpha
+            value = alpha
         elif ans2 == 'B':
-            weight = beta
+            value = beta
     elif ans1 == 'B':
         if ans2 == 'A':
-            weight = beta
+            value = beta
         elif ans2 == 'B':
-            weight = gamma
+            value = gamma
     
-    return weight
+    return value
