@@ -3,6 +3,35 @@ import numpy as np
 import pandas as pd
 
 # Custom library with some useful functions realted to the graph
+colors = { "pp"    : {"Sí":'#d7191c', "No":'#2c7bb6', "nvr":'#ffffbf'}, 
+           "p_cuid": {"Sí":'#d7191c', "No":'#2c7bb6', "nvr":'#ffffbf'},
+           "genere": {"m":"#2c7bb6", "f":"#d7191c", "d":"#fdae61", "nvr":"#abd9e9"},
+           "edat"  : {'1':"#d73027", '2':"#fc8d59", '3':"#fee090", '4':"#e0f3f8", '5':"#91bfdb", '6':"#4575b4", 'nvr':"gray"}   
+      }
+
+def color_coding(
+        G: nx.graph,
+        sociodem_df: pd.DataFrame,
+        sociodem_entry: str,
+        colors_dict: dict 
+        ) -> list:
+    """
+    For each node in graph G, maps a specified attribute to a color.
+
+    Args:
+        - G: networkx graph that we want to color   
+        - sociodem_df: dataframe containing sociodemographic info
+        - sociodem_entry: key of the attribute that we want to color. Possible values: sociodem_df.keys()
+        - colors_dict: dictionary which maps each sociodem_entry attribute to a color (see top)
+    
+    Returns:
+        - color_map: list which contains the nodes colors ordered by graph node order
+     """
+
+    color_map = [colors[sociodem_entry][sociodem_df[sociodem_entry].loc[node]] for node in G]
+
+    return color_map
+
 
 def one_pair_weight_for_one_story(
         ans1: str,
