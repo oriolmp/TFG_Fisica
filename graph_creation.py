@@ -3,7 +3,7 @@ import networkx as nx
 import numpy as np
 import os
 import itertools
-from utils import edge_weight, one_pair_weight_for_one_story
+from utils import edge_weight, young_old
 
 # This file generates a graph from the answers to different stories.
 
@@ -41,6 +41,10 @@ for ans_type in ['yo', 'otro']:
     # Generate graph
     G = nx.Graph()
     G.add_weighted_edges_from(elist_yo)
+
+    # Set node attributes
+    attrs = {node: {"age_bracket": young_old(df_sociodem.loc[node].edat)} for node in G.nodes()}
+    nx.set_node_attributes(G, attrs)
 
     # Save graph
     i = 0
