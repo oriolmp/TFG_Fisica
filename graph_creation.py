@@ -51,7 +51,7 @@ for ans_type in ['yo', 'otro']:
     graph_path = GRAPH_DIRECTORY + graph_name + f'{i}.graphml'
     while os.path.exists(graph_path):
         i += 1
-        graph_path = GRAPH_DIRECTORY + f'graph_{i}.graphml'
+        graph_path = GRAPH_DIRECTORY + graph_name + f'{i}.graphml'
 
     nx.write_graphml(G, graph_path)
     print(f'Graph saved at {graph_path}')
