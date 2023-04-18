@@ -95,3 +95,23 @@ def edge_weight(
     edge_value = np.mean(value_list)
 
     return edge_value 
+
+def young_old(age_bracket: str) -> str:
+    """
+    Given an age interval, it returns classifies it as young or old.
+
+    Args:
+        - age_bracket: str with the indicator of the age interval given by de datset. I.e: '1' indicates interval '25-35'
+
+    Returns:
+        - 'young': if the age_bracket is '18-24', '25-34' or '35-44'
+        - 'old': if the age_bracket is '45-54', '55-64' or '65+'
+        - 'nay': if the user did not want to give his age information
+
+    """
+    if age_bracket in ["1", "2", "3"]:
+        return "young"
+    elif age_bracket in ["4", "5", "6"]: 
+        return "old"
+    else: 
+        return "nay"
