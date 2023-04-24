@@ -14,7 +14,7 @@ __all__ = [
 ]
 
 
-[docs]def degree_assortativity_coefficient(G, x="out", y="in", weight=None, nodes=None):
+def degree_assortativity_coefficient(G, x="out", y="in", weight=None, nodes=None):
     """Compute degree assortativity of graph.
 
     Assortativity measures the similarity of connections
@@ -99,7 +99,7 @@ __all__ = [
 
 
 
-[docs]def degree_pearson_correlation_coefficient(G, x="out", y="in", weight=None, nodes=None):
+def degree_pearson_correlation_coefficient(G, x="out", y="in", weight=None, nodes=None):
     """Compute degree assortativity of graph.
 
     Assortativity measures the similarity of connections
@@ -159,7 +159,7 @@ __all__ = [
 
 
 
-[docs]def attribute_assortativity_coefficient(G, attribute, nodes=None):
+def attribute_assortativity_coefficient(G, attribute, nodes=None):
     """Compute assortativity for node attributes.
 
     Assortativity measures the similarity of connections
@@ -206,7 +206,7 @@ __all__ = [
 
 
 
-[docs]def numeric_assortativity_coefficient(G, attribute, nodes=None):
+def numeric_assortativity_coefficient(G, attribute, nodes=None):
     """Compute assortativity for numerical node attributes.
 
     Assortativity measures the similarity of connections
