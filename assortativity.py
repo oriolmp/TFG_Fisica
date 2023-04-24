@@ -62,13 +62,13 @@ def node_attribute_xy(G, attribute, nodes=None):
                 uvweight = w['weight']
                 yield (uattr, vattr, uvweight)
 
-def mixing_dict(xy, normalized=False):
+def mixing_dict(xyz, normalized=False):
     """Returns a dictionary representation of mixing matrix.
 
     Parameters
     ----------
-    xy : list or container of two-tuples
-       Pairs of (x,y) items.
+    xyz : list or container of three-tuples
+       Pairs of (x,y,z) items (attribute, attribute, weight).
 
     attribute : string
        Node attribute key
@@ -83,14 +83,14 @@ def mixing_dict(xy, normalized=False):
     """
     d = {}
     psum = 0.0
-    for x, y in xy:
+    for x, y, z in xyz:
         if x not in d:
             d[x] = {}
         if y not in d:
             d[y] = {}
         v = d[x].get(y, 0)
-        d[x][y] = v + 1
-        psum += 1
+        d[x][y] = v + z
+        psum += z
 
     if normalized:
         for _, jdict in d.items():
