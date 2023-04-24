@@ -7,6 +7,10 @@ __all__ = [
     "attribute_assortativity_coefficient"
 ]
 
+"""
+NOTA: Nomes hem modificat node_attribute_xy i mixing dict
+
+"""
 
 def node_attribute_xy(G, attribute, nodes=None):
     """Returns iterator of node-attribute pairs for all edges in G, with the weight of the edge connecting them.
