@@ -33,7 +33,7 @@ for ans_type in ['yo', 'otro']:
     subset_df = subset_df.dropna(how='any')
 
     # Compute list of 3-D tuples containing (user_id_1, user_id_2, avg_weight_1_2) for selected stories
-    stories = df_ans.columns
+    stories = subset_df.columns
     pairs = itertools.combinations(subset_df.index, 2)
 
     elist_yo = [(pair[0], pair[1], edge_weight(df_ans, pair, stories)) for pair in pairs]   
