@@ -198,6 +198,52 @@ def attribute_mixing_matrix(G, attribute, nodes=None, mapping=None, normalized=T
     return a
 
 
+def attribute_ac(M):
+    """Compute assortativity for attribute matrix M.
+
+    Parameters
+    ----------
+    M : numpy.ndarray
+        2D ndarray representing the attribute mixing matrix.
+
+    Notes
+    -----
+    This computes Eq. (2) in Ref. [1]_ , (trace(e)-sum(e^2))/(1-sum(e^2)),
+    where e is the joint probability distribution (mixing matrix)
+    of the specified attribute.
+
+    References
+    ----------
+    .. [1] M. E. J. Newman, Mixing patterns in networks,
+       Physical Review E, 67 026126, 2003
+    """
+    if M.sum() != 1.0:
+        M = M / M.sum()
+    s = (M @ M).sum()
+    t = M.trace()
+    r = (t - s) / (1 - s)
+    return r
+
+
+def _numeric_ac(M, mapping):
+    # M is a 2D numpy array
+    # numeric assortativity coefficient, pearsonr
+    import numpy as np
+
+    if M.sum() != 1.0:
+        M = M / M.sum()
+    x = np.array(list(mapping.keys()))
+    y = x  # x and y have the same support
+    idx = list(mapping.values())
+    a = M.sum(axis=0)
+    b = M.sum(axis=1)
+    vara = (a[idx] * x**2).sum() - ((a[idx] * x).sum()) ** 2
+    varb = (b[idx] * y**2).sum() - ((b[idx] * y).sum()) ** 2
+    xy = np.outer(x, y)
+    ab = np.outer(a[idx], b[idx])
+    return (xy * (M - ab)).sum() / np.sqrt(vara * varb)
+
+
 def attribute_assortativity_coefficient(G, attribute, nodes=None):
     """Compute assortativity for node attributes.
 
