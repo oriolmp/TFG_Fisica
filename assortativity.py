@@ -1,6 +1,8 @@
 """Node assortativity coefficients and correlation measures.
 """
 
+from networkx.utils import dict_to_numpy_array
+
 __all__ = [
     "attribute_assortativity_coefficient"
 ]
