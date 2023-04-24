@@ -1,12 +1,8 @@
 """Node assortativity coefficients and correlation measures.
 """
-from networkx.algorithms.assortativity.pairs import node_degree_xy
 
 __all__ = [
-    "degree_pearson_correlation_coefficient",
-    "degree_assortativity_coefficient",
-    "attribute_assortativity_coefficient",
-    "numeric_assortativity_coefficient",
+    "attribute_assortativity_coefficient"
 ]
 
 
