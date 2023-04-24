@@ -11,7 +11,7 @@ __all__ = [
 
 
 def node_attribute_xy(G, attribute, nodes=None):
-    """Returns iterator of node-attribute pairs for all edges in G.
+    """Returns iterator of node-attribute pairs for all edges in G, with the weight of the edge connecting them.
 
     Parameters
     ----------
@@ -26,8 +26,8 @@ def node_attribute_xy(G, attribute, nodes=None):
 
     Returns
     -------
-    (x, y): 2-tuple
-        Generates 2-tuple of (attribute, attribute) values.
+    (x, y, z): 2-tuple
+        Generates 2-tuple of (attribute, attribute, weight) values.
 
     Examples
     --------
@@ -35,8 +35,10 @@ def node_attribute_xy(G, attribute, nodes=None):
     >>> G.add_node(1, color="red")
     >>> G.add_node(2, color="blue")
     >>> G.add_edge(1, 2)
+    >>> weight = 0.1
+    >>> G.add_weighted_edges_from(list((1, n, weight) for n in G.nodes))
     >>> list(nx.node_attribute_xy(G, "color"))
-    [('red', 'blue')]
+    [('red', 'blue', 0.1)]
 
     Notes
     -----
@@ -59,9 +61,10 @@ def node_attribute_xy(G, attribute, nodes=None):
                 for _ in keys:
                     yield (uattr, vattr)
         else:
-            for v in nbrsdict:
+            for v, w in nbrsdict.items():
                 vattr = Gnodes[v].get(attribute, None)
-                yield (uattr, vattr)
+                uvweight = w['weight']
+                yield (uattr, vattr, uvweight)
 
 
 
