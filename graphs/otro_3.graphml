@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d1" for="edge" attr.name="weight" attr.type="float"/>
+<key id="d0" for="node" attr.name="age_bracket" attr.type="string"/>
+<graph edgedefault="undirected"><node id="4e53c5c">
+  <data key="d0">old</data>
+</node>
+<node id="bd4b2f4">
+  <data key="d0">young</data>
+</node>
+<node id="aa07d95">
+  <data key="d0">old</data>
+</node>
+<node id="db7d9c3">
+  <data key="d0">old</data>
+</node>
+<edge source="4e53c5c" target="bd4b2f4">
+  <data key="d1">0.5686274509803921</data>
+</edge>
+<edge source="4e53c5c" target="aa07d95">
+  <data key="d1">0.6421568627450979</data>
+</edge>
+<edge source="4e53c5c" target="db7d9c3">
+  <data key="d1">0.3676470588235294</data>
+</edge>
+<edge source="bd4b2f4" target="aa07d95">
+  <data key="d1">0.45588235294117646</data>
+</edge>
+<edge source="bd4b2f4" target="db7d9c3">
+  <data key="d1">0.30392156862745096</data>
+</edge>
+<edge source="aa07d95" target="db7d9c3">
+  <data key="d1">0.3235294117647059</data>
+</edge>
+</graph></graphml>
