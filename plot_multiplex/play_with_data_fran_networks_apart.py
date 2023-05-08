@@ -21,8 +21,11 @@ from src.plot_multiplex import LayeredNetworkGraph
 
 # take only stories and (around) particpants that were answered by all/ answered all 
 N_pa = 50
-sociodem_entry = sys.argv[1]#"genere"
-layer_tp = sys.argv[2]#uniplex
+# sociodem_entry = sys.argv[1]#"genere"
+# layer_tp = sys.argv[2]#uniplex
+
+sociodem_entry = "genere"
+layer_tp = "uniplex"
 
 
 ANSWERS_TYPE_C_PATH = '../data/Answers_to_Microstories/answers_stories_C.pkl'
