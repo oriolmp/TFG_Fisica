@@ -24,8 +24,8 @@ N_pa = 50
 # sociodem_entry = sys.argv[1]#"genere"
 # layer_tp = sys.argv[2]#uniplex
 
-sociodem_entry = "genere"
-layer_tp = "uniplex"
+sociodem_entry = "age_bracket"
+layer_tp = "multiplex"
 
 
 ANSWERS_TYPE_C_PATH = '../data/Answers_to_Microstories/answers_stories_C.pkl'
@@ -35,6 +35,7 @@ N_PA = 50
 # Load data
 df_C = pd.read_pickle(ANSWERS_TYPE_C_PATH)
 df_sociodem = pd.read_pickle(SOCIODEMOGRAPHIC_DATA_PATH)
+df_sociodem['age_bracket'] = df_sociodem['edat'].apply(lambda x: 'young' if x in ['1', '2', '3'] else ('old' if x in ['4', '5', '6'] else ('nvr' if x == 'nvr' else None)))
 
 # Preprocess answers dataframe 
 df_C.columns = df_C.columns.swaplevel(0, 1)
@@ -78,7 +79,8 @@ colors = { "pp"    : {"Sí":'#d7191c', "No":'#2c7bb6', "nvr":'#ffffbf', "nay":"l
            "p_g1"  : {"a":"#2c7bb6", "m":"#d7191c", "b":"#fdae61", "nvr":"#abd9e9", "nay":"lightgray"},
            "p_g2"  : {"a":"#2c7bb6", "m":"#d7191c", "b":"#fdae61", "nvr":"#abd9e9", "nay":"lightgray"},
            "p_l"   : {"Sí":'#d7191c', "No":'#2c7bb6', "nvr":'#ffffbf', "nay":"lightgray"},
-           "p_ac" : {"Sí":'#d7191c', "No":'#2c7bb6', "nvr":'#ffffbf', "nay":"lightgray"}
+           "p_ac" : {"Sí":'#d7191c', "No":'#2c7bb6', "nvr":'#ffffbf', "nay":"lightgray"},
+           "age_bracket": {"old": "#2c7bb6", "young": "#d7191c"} # 'nvr':"gray"
       }
 
 labels_ca = { "pp"    : {"Sí":'Sí', "No":'No', "nvr":'No vull respondre', "nay":"Encara no respost"},
@@ -88,9 +90,8 @@ labels_ca = { "pp"    : {"Sí":'Sí', "No":'No', "nvr":'No vull respondre', "nay
            "p_g1"  : {"a":"Alt", "m":"Mitjà", "b":"Baix", "nvr":'No vull respondre', "nay":"Encara no respost"},
            "p_g2"  : {"a":"Alt", "m":"Mitjà", "b":"Baix", "nvr":'No vull respondre', "nay":"Encara no respost"},
            "p_l"   : {"Sí":'Sí', "No":'No', "nvr":'No vull respondre', "nay":"Encara no respost"},
-           "p_ac" : {"Sí":'Sí', "No":'No', "nvr":'No vull respondre', "nay":"Encara no respost"}  
-           
-           
+           "p_ac" : {"Sí":'Sí', "No":'No', "nvr":'No vull respondre', "nay":"Encara no respost"},
+           "age_bracket": {"old": "45-65+", "young": "18-45"} #  'nvr':"Not answered"             
       }
 
 super_title_cat = {"genere":" pel seu gènere",
@@ -100,7 +101,8 @@ super_title_cat = {"genere":" pel seu gènere",
           "p_g1"  : " per seu grau de implicació amb els pSM del seu entorn",
           "p_g2"  : " pel grau de implicació del entorn amb pSM amb el seu benestar",
           "p_l"   : " per si té pp al ambit laboral",
-          "p_ac" : " per si té pp al ambit d'oci" }  
+          "p_ac" : " per si té pp al ambit d'oci",
+          "age_bracket": " if they are from the same age group" }  
 
 def connect_pair(pair_answers, answers=["A","A"]):
     """
@@ -243,6 +245,7 @@ df_sociodem_these_stories[sociodem_entry].value_counts().reindex(list(colors[soc
                
 titles = {"genere":"Quin és el gènere\namb què més et identifiques?",
           "edat":"A quin rang d'edat\npertanys (en anys)?",
+          "age_bracket": "Age bracket",
           "pp":"Vius o has viscut\nproblemas de salut mental?",
           "p_cuid":"Ets persona cuidadora\nd'una persona que té\nproblemes de salut mental?",
           "p_g1"  : "En general, com definiries\nel teu grau d implicació en referència\nals problemes de salut mental del teu entorn social?",
@@ -250,7 +253,7 @@ titles = {"genere":"Quin és el gènere\namb què més et identifiques?",
           "p_l"   : "Una o diverses persones\ndel teu entorn laboral\nté o tenen problemes de salut mental?",
           "p_ac" : "Una o diverses persones\namb qui et relaciones a través d'activitats culturals o d oci\nté o tenen problemes de salut mental?" }    
                            
-ax6.set_title(titles[sociodem_entry], fontsize=10)
+# ax6.set_title(titles[sociodem_entry], fontsize=10)
 ax6.set_ylabel("")
 
 pickle.dump(fig, open('FigureObject_'+sociodem_entry+'_'+layer_tp+'_pie.pickle', 'wb')) 
