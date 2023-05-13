@@ -91,7 +91,7 @@ labels_ca = { "pp"    : {"Sí":'Sí', "No":'No', "nvr":'No vull respondre', "nay
            "p_g2"  : {"a":"Alt", "m":"Mitjà", "b":"Baix", "nvr":'No vull respondre', "nay":"Encara no respost"},
            "p_l"   : {"Sí":'Sí', "No":'No', "nvr":'No vull respondre', "nay":"Encara no respost"},
            "p_ac" : {"Sí":'Sí', "No":'No', "nvr":'No vull respondre', "nay":"Encara no respost"},
-           "age_bracket": {"old": "45-65+", "young": "18-45"} #  'nvr':"Not answered"             
+           "age_bracket": {"old": "old", "young": "young"} #  'nvr':"Not answered"             
       }
 
 super_title_cat = {"genere":" pel seu gènere",
