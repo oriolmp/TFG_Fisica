@@ -6,7 +6,8 @@ import pandas as pd
 COLORS = { "pp"    : {"Sí":'#d7191c', "No":'#2c7bb6', "nvr":'#ffffbf'}, 
            "p_cuid": {"Sí":'#d7191c', "No":'#2c7bb6', "nvr":'#ffffbf'},
            "genere": {"m":"#2c7bb6", "f":"#d7191c", "d":"#fdae61", "nvr":"#abd9e9"},
-           "edat"  : {'1':"#d73027", '2':"#fc8d59", '3':"#fee090", '4':"#e0f3f8", '5':"#91bfdb", '6':"#4575b4", 'nvr':"gray"}   
+           "edat"  : {'1':"#d73027", '2':"#fc8d59", '3':"#fee090", '4':"#e0f3f8", '5':"#91bfdb", '6':"#4575b4", 'nvr':"gray"},
+           "age_bracket": {"old": "#2c7bb6", "young": "#d7191c", 'nvr':"gray"}
       }
 
 def color_coding(
